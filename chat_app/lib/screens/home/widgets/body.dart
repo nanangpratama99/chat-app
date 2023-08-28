@@ -3,8 +3,15 @@ import 'package:chat_app/models/user_profile_model.dart';
 import 'package:chat_app/screens/home/widgets/list_profile.dart';
 import 'package:flutter/material.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({super.key});
+
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +29,17 @@ class Body extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(left: 35.0),
-                    child: Text(
-                      menuDataTitle[index].menu_title,
-                      style: const TextStyle(color: Colors.white, fontSize: 25),
+                    child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          currentIndex = index;
+                        });
+                      },
+                      child: Text(
+                        menuDataTitle[index].menu_title,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 25),
+                      ),
                     ),
                   );
                 },
@@ -34,7 +49,7 @@ class Body extends StatelessWidget {
           ],
         ),
         Positioned(
-          top: 70,
+          top: 75,
           child: Container(
             height: 250,
             width: MediaQuery.of(context).size.width,
@@ -73,7 +88,10 @@ class Body extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: userProfileData.length,
                     itemBuilder: (context, index) {
-                      return BuildFavouriteContact(index);
+                      if (userProfileData[index].isFavouriteContact) {
+                        return BuildFavouriteContact(index);
+                      }
+                      return Container();
                     },
                   ),
                 )

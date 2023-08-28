@@ -24,7 +24,6 @@ class HomeScreen extends StatelessWidget {
 
   Drawer BuildDrawer(BuildContext context) {
     return Drawer(
-      
       width: 300,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -138,6 +137,7 @@ class HomeScreen extends StatelessWidget {
                   )
                 ],
               ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
