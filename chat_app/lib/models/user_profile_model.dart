@@ -5,13 +5,17 @@ class UserProfileModel {
   String lastSent;
   bool isFavouriteContact = false;
 
-  UserProfileModel({
-    required this.name,
-    required this.image,
-    required this.message,
-    required this.lastSent,
-    required this.isFavouriteContact,
-  });
+  bool isActive = false;
+  bool isSender = true;
+
+  UserProfileModel(
+      {required this.name,
+      required this.image,
+      required this.message,
+      required this.lastSent,
+      required this.isFavouriteContact,
+      required this.isActive,
+      required this.isSender});
 }
 
 List<UserProfileModel> userProfileData = [
@@ -21,6 +25,8 @@ List<UserProfileModel> userProfileData = [
     message: 'lorem ipsum dolor ...',
     lastSent: '8',
     isFavouriteContact: true,
+    isActive: true,
+    isSender: true,
   ),
   UserProfileModel(
     name: 'Leo',
@@ -28,6 +34,8 @@ List<UserProfileModel> userProfileData = [
     message: 'lorem ipsum dolor ...',
     lastSent: '3',
     isFavouriteContact: true,
+    isActive: false,
+    isSender: true,
   ),
   UserProfileModel(
     name: 'Reni',
@@ -35,6 +43,8 @@ List<UserProfileModel> userProfileData = [
     message: 'lorem ipsum dolor ...',
     lastSent: '1',
     isFavouriteContact: true,
+    isActive: true,
+    isSender: true,
   ),
   UserProfileModel(
     name: 'Adi',
@@ -42,6 +52,8 @@ List<UserProfileModel> userProfileData = [
     message: 'lorem ipsum dolor ...',
     lastSent: '2',
     isFavouriteContact: true,
+    isActive: false,
+    isSender: true,
   ),
   UserProfileModel(
     name: 'Deni',
@@ -49,6 +61,8 @@ List<UserProfileModel> userProfileData = [
     message: 'lorem ipsum dolor ...',
     lastSent: '1',
     isFavouriteContact: false,
+    isActive: false,
+    isSender: true,
   ),
   UserProfileModel(
     name: 'Deni',
@@ -56,6 +70,8 @@ List<UserProfileModel> userProfileData = [
     message: 'lorem ipsum dolor ...',
     lastSent: '1',
     isFavouriteContact: false,
+    isActive: false,
+    isSender: true,
   ),
   UserProfileModel(
     name: 'Deni',
@@ -63,6 +79,8 @@ List<UserProfileModel> userProfileData = [
     message: 'lorem ipsum dolor ...',
     lastSent: '1',
     isFavouriteContact: false,
+    isActive: false,
+    isSender: true,
   ),
   UserProfileModel(
     name: 'Deni',
@@ -70,6 +88,8 @@ List<UserProfileModel> userProfileData = [
     message: 'lorem ipsum dolor ...',
     lastSent: '1',
     isFavouriteContact: false,
+    isActive: false,
+    isSender: true,
   ),
   UserProfileModel(
     name: 'Deni',
@@ -77,6 +97,8 @@ List<UserProfileModel> userProfileData = [
     message: 'lorem ipsum dolor ...',
     lastSent: '1',
     isFavouriteContact: false,
+    isActive: false,
+    isSender: true,
   ),
   UserProfileModel(
     name: 'Deni',
@@ -84,5 +106,7 @@ List<UserProfileModel> userProfileData = [
     message: 'lorem ipsum dolor ...',
     lastSent: '1',
     isFavouriteContact: false,
+    isActive: false,
+    isSender: true,
   ),
 ];

@@ -21,7 +21,7 @@ class _BodyState extends State<Body> {
           children: [
             const SizedBox(height: 20),
             SizedBox(
-              height: 40,
+              height: 50,
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -35,10 +35,23 @@ class _BodyState extends State<Body> {
                           currentIndex = index;
                         });
                       },
-                      child: Text(
-                        menuDataTitle[index].menu_title,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 25),
+                      child: Column(
+                        children: [
+                          Text(
+                            menuDataTitle[index].menu_title,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 25),
+                          ),
+                          if (currentIndex == index)
+                            Container(
+                              height: 5,
+                              width: 15,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.white.withOpacity(0.5),
+                              ),
+                            )
+                        ],
                       ),
                     ),
                   );
@@ -48,59 +61,60 @@ class _BodyState extends State<Body> {
             const SizedBox(height: 30),
           ],
         ),
-        Positioned(
-          top: 75,
-          child: Container(
-            height: 250,
-            width: MediaQuery.of(context).size.width,
-            decoration: const BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(45),
-                topLeft: Radius.circular(45),
+        if (currentIndex == 0)
+          Positioned(
+            top: 75,
+            child: Container(
+              height: 250,
+              width: MediaQuery.of(context).size.width,
+              decoration: const BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(45),
+                  topLeft: Radius.circular(45),
+                ),
+              ),
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Favourite contact",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        Icon(
+                          Icons.more_horiz,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 120,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: userProfileData.length,
+                      itemBuilder: (context, index) {
+                        if (userProfileData[index].isFavouriteContact) {
+                          return BuildFavouriteContact(index);
+                        }
+                        return Container();
+                      },
+                    ),
+                  )
+                ],
               ),
             ),
-            child: Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Favourite contact",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                      Icon(
-                        Icons.more_horiz,
-                        color: Colors.white,
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 120,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: userProfileData.length,
-                    itemBuilder: (context, index) {
-                      if (userProfileData[index].isFavouriteContact) {
-                        return BuildFavouriteContact(index);
-                      }
-                      return Container();
-                    },
-                  ),
-                )
-              ],
-            ),
           ),
-        ),
         Positioned(
-          top: 270,
+          top: currentIndex == 0 ? 270 : 75,
           bottom: 0,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
@@ -115,11 +129,14 @@ class _BodyState extends State<Body> {
             child: ListView.builder(
               itemCount: userProfileData.length,
               itemBuilder: (context, index) {
-                return BuildListProfile(userProfileData, index);
+                if (currentIndex == 0 || userProfileData[index].isActive) {
+                  return BuildListProfile(userProfileData, index);
+                }
+                return Container();
               },
             ),
           ),
-        )
+        ),
       ],
     );
   }
